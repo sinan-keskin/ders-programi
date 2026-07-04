@@ -34,9 +34,7 @@ function init() {
     nextWeekBtn.addEventListener('click', () => { if(currentWeekIndex < weeksInMonth.length - 1) { currentWeekIndex++; renderGrid(); } });
     
     document.getElementById('clearBtn').addEventListener('click', clearData);
-    document.getElementById('exportPngBtn').addEventListener('click', exportPNG);
     document.getElementById('exportPdfBtn').addEventListener('click', exportPDF);
-    document.getElementById('shareBtn').addEventListener('click', sharePlan);
 }
 
 // Selectors
@@ -173,21 +171,7 @@ function clearData() {
 }
 
 // Export Fonksiyonları
-async function exportPNG() {
-    try {
-        exportContent.classList.add('exporting'); // Boş yer tutucuları ve hover efektlerini gizle
-        const canvas = await html2canvas(exportContent, { scale: 2, useCORS: true, backgroundColor: null });
-        exportContent.classList.remove('exporting');
-        
-        const link = document.createElement('a');
-        link.download = `Haftalik-Plan-${currentWeekDisplay.textContent}.png`;
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-    } catch (e) {
-        exportContent.classList.remove('exporting');
-        alert("PNG oluşturulurken hata: " + e.message);
-    }
-}
+
 
 async function exportPDF() {
     try {
@@ -239,29 +223,7 @@ async function exportPDF() {
     }
 }
 
-async function sharePlan() {
-    try {
-        exportContent.classList.add('exporting');
-        const canvas = await html2canvas(exportContent, { scale: 2, useCORS: true, backgroundColor: null });
-        exportContent.classList.remove('exporting');
-        
-        canvas.toBlob(async (blob) => {
-            const file = new File([blob], `Plan.png`, { type: 'image/png' });
-            if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                await navigator.share({
-                    title: 'Haftalık Plan',
-                    text: 'Haftalık Ders Planı',
-                    files: [file]
-                });
-            } else {
-                alert('Tarayıcınız doğrudan paylaşımı desteklemiyor. Resmi indirip paylaşabilirsiniz.');
-                exportPNG();
-            }
-        });
-    } catch (e) {
-        alert("Paylaşım başlatılırken hata oluştu.");
-    }
-}
+
 
 // Başlat
 init();
