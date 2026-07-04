@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Haftalık Ders Planı Oluşturucu</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <!-- Üst Kontrol Paneli -->
+    <div class="top-bar">
+        <div class="date-selectors">
+            <select id="monthSelect"></select>
+            <select id="yearSelect"></select>
+        </div>
+        <div class="week-nav">
+            <button id="prevWeekBtn" class="btn btn-secondary">Önceki Hafta</button>
+            <span id="currentWeekDisplay">Hafta 1</span>
+            <button id="nextWeekBtn" class="btn btn-primary">Sonraki Hafta</button>
+        </div>
+        <div class="export-actions">
+            <button id="clearBtn" class="btn btn-danger">Temizle</button>
+            <button id="exportPngBtn" class="btn btn-info">PNG İndir</button>
+            <button id="exportPdfBtn" class="btn btn-info">PDF İndir</button>
+            <button id="shareBtn" class="btn btn-success">Paylaş</button>
+        </div>
+    </div>
+
+    <!-- Canvas (Dışa Aktarılacak Alan) -->
+    <div class="preview-section">
+        <div class="export-wrapper" id="exportContent">
+            <!-- Arka plan görseli CSS ile atanır -->
+            <div class="plan-grid" id="planGrid">
+                <!-- Javascript tarafından doldurulacak -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
